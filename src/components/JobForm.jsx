@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { JOB_STATUS_OPTIONS } from '../types/database'
 
-export default function JobForm({ job, onSuccess, onCancel }) {
+export default function JobForm({ job, onSuccess }) {
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     company: job?.company || '',
@@ -150,7 +150,7 @@ export default function JobForm({ job, onSuccess, onCancel }) {
         />
       </div>
 
-      <div className="flex gap-2 pt-2">
+      <div className="pt-4">
         <button
           type="submit"
           disabled={loading}
@@ -158,15 +158,6 @@ export default function JobForm({ job, onSuccess, onCancel }) {
         >
           {loading ? 'Saving...' : job ? 'Update Job' : 'Add Job'}
         </button>
-        {onCancel && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-6 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
-          >
-            Cancel
-          </button>
-        )}
       </div>
     </form>
   )

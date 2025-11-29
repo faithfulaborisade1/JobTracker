@@ -149,7 +149,6 @@ export default function Dashboard({ user }) {
               setEditingJob(null)
               fetchJobs()
             }}
-            onCancel={editingJob ? () => setEditingJob(null) : null}
           />
         </div>
 
