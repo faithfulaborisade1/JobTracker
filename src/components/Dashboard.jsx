@@ -24,9 +24,12 @@ export default function Dashboard({ user }) {
 
   const fetchJobs = async () => {
     try {
+      const { data: { user: currentUser } } = await supabase.auth.getUser()
+
       const { data, error } = await supabase
         .from('jobs')
         .select('*')
+        .eq('user_id', currentUser.id)
         .order('created_at', { ascending: false })
 
       if (error) throw error
