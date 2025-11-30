@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { JOB_STATUS_OPTIONS } from '../types/database'
 
@@ -12,6 +12,28 @@ export default function JobForm({ job, onSuccess }) {
     date_applied: job?.date_applied || '',
     notes: job?.notes || ''
   })
+
+  useEffect(() => {
+    if (job) {
+      setFormData({
+        company: job.company || '',
+        title: job.title || '',
+        url: job.url || '',
+        status: job.status || 'saved',
+        date_applied: job.date_applied || '',
+        notes: job.notes || ''
+      })
+    } else {
+      setFormData({
+        company: '',
+        title: '',
+        url: '',
+        status: 'saved',
+        date_applied: '',
+        notes: ''
+      })
+    }
+  }, [job])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
